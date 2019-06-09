@@ -42,11 +42,17 @@ public class MainParser {
                 parseRule = file.readLine();
                 title = file.readLine();
             }
-            if(title == null || !title.equals(Headers[3])){
+            if(title == null){
+                queryText = null;
+            }
+            else if(!title.equals(Headers[3])){
                 throw new ParsingException("ERROR: Problem with file format.");
             }
             else {
                 queryText = file.readLine();
+                if (queryText == null){
+                    throw new ParsingException("ERROR: Problem with file format.");
+                }
             }
         } catch (ParsingException e) {
             System.err.println(e.getMessage());
